@@ -26,6 +26,6 @@ def initialize_database(db_path):
             )
             """
         )
-        connection.save()
+        connection.commit()
     finally:
         connection.close()
