@@ -87,10 +87,6 @@ class MovieStorage:
 
     def query_movies(self, columns, min_rating, limit):
         """Return selected fields from matching movies using SQL."""
-        # TODO: validate columns as in select_columns().
-        # SELECT id plus those columns and filter by minimum rating.
-        # Sort by rating DESC then id ASC, and apply limit.
-        # Return dictionaries and log the selected columns and row count at DEBUG.
         connection = get_connection(self.db_path)
         try:
             rows = connection.execute(
