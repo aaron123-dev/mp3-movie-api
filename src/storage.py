@@ -87,6 +87,16 @@ class MovieStorage:
 
     def query_movies(self, columns, min_rating, limit):
         """Return selected fields from matching movies using SQL."""
+        if not columns:
+            logger.error("Select at least one column")
+            raise ValueError("Select at least one column")
+
+        for column in columns:
+            if column not in MOVIE_COLUMNS:
+                logger.error(f"Unsupported column: {column}")
+                raise ValueError(f"Unsupported column: {column}")
+
+        selected_columns = ", ".join(["id"] + columns)
         connection = get_connection(self.db_path)
         try:
             rows = connection.execute(
